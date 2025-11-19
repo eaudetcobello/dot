@@ -10,10 +10,14 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		event = "VeryLazy",
+		opts = {
+			{ options = { disabled_filetypes = { "oil" } } },
+		},
 	},
 	{
 		"j-hui/fidget.nvim",
+		event = "LspProgress",
 		opts = {},
 	},
 	{
@@ -52,20 +56,6 @@ return {
 		"neanias/everforest-nvim",
 		config = function()
 			vim.cmd([[colorscheme everforest]])
-		end,
-	},
-	{
-		"stevearc/oil.nvim",
-		dependencies = {
-			{ "nvim-tree/nvim-web-devicons" },
-		},
-		lazy = false,
-		config = function()
-			require("oil").setup({
-				skip_confirm_for_simple_edits = true,
-				watch_for_changes = true,
-			})
-			vim.keymap.set("n", "-", require("oil").open, { desc = "Open Oil" })
 		end,
 	},
 }
