@@ -1,0 +1,78 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"ft-shada",
+				"netrw",
+				"editorconfig",
+			},
+		},
+	},
+})
+
+-- Options
+vim.opt.hidden = true
+vim.opt.laststatus = 3
+vim.opt.clipboard = "unnamedplus"
+vim.opt.cmdheight = 0
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.inccommand = "split"
+vim.opt.number = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.wrap = false
+vim.opt.autoread = true
+vim.opt.signcolumn = "yes"
+vim.opt.backspace = "indent,eol,start"
+vim.opt.wildmode = { "lastused", "full" }
+vim.opt.pumheight = 15
+vim.opt.scrolloff = 3
+vim.opt.winborder = "rounded"
+vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.swapfile = false
+vim.opt.timeoutlen = 400
+vim.opt.termguicolors = true
+
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
+vim.keymap.set("n", "<leader>.", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	print("Copied: " .. path)
+end, { desc = "Copy full file path" })
+
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Exit terminal mode" })
+vim.keymap.set("n", "<leader>ec", "<cmd>e $MYVIMRC<CR>", { desc = "Edit neovim config" })
+
+vim.keymap.set("n", "<leader>bd", "<cmd>bdel<CR>", { desc = "Delete buffer" })
+
+-- Normal mode: search word under cursor, then change next match
+vim.keymap.set("n", "<M-d>", [[:let @/='\<'.expand('<cword>').'\>'<CR>cgn]], { silent = true })
+-- Visual mode: search selection, then change next match
+vim.keymap.set("x", "<M-d>", [["sy:let @/=@s<CR>cgn]], { silent = true })
+
+vim.keymap.set("n", "[d", vim.diagnostic.get_next, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.get_prev, { desc = "Next diagnostic" })

@@ -1,0 +1,40 @@
+return {
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			vim.lsp.enable({
+				"gopls",
+				"lua_ls",
+				"rust_analyzer",
+				"expert",
+			})
+			vim.lsp.config["gopls"] = {
+				staticcheck = true,
+			}
+			local lspgroup = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
+			local map = vim.keymap.set
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = lspgroup,
+				callback = function(args)
+					local fzf = require("fzf-lua")
+					map("n", "gd", fzf.lsp_definitions, { desc = "Goto definitions" })
+					map("n", "gr", fzf.lsp_references, { desc = "Goto references" })
+					map("n", "gt", fzf.lsp_typedefs, { desc = "Goto typedefs" })
+					map("n", "gi", fzf.lsp_implementations, { desc = "Goto implementations" })
+					map("n", "<leader>ca", fzf.lsp_code_actions, { desc = "Code actions" })
+					map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+				end,
+			})
+		end,
+	},
+	{
+		"folke/lazydev.nvim",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "LazyVim", words = { "LazyVim" } },
+				{ path = "lazy.nvim", words = { "LazyVim" } },
+			},
+		},
+	},
+}
