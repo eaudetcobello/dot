@@ -3,16 +3,36 @@ return {
 		"TheNoeTrevino/no-go.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		ft = "go",
-		opts = {
-			identifiers = { "err", "error" },
-		},
+		config = function()
+			require("no-go").setup({
+				identifiers = { "err", "error" },
+				fold_imports = true,
+			})
+			vim.highlight.priorities.semantic_tokens = 95 -- default is 125
+			vim.highlight.priorities.treesitter = 100 -- default is 100
+		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		opts = {
-			{ options = { disabled_filetypes = { "oil" } } },
+			options = {
+				disabled_filetypes = { "oil" },
+				section_separators = { left = " ", right = " " },
+				component_separators = { left = " ", right = " " },
+				icons_enabled = true,
+			},
+			sections = {
+				lualine_x = {},
+			},
+		},
+	},
+	{
+		"nvim-tree/nvim-web-devicons",
+		opts = {
+			color_icons = true,
+			default = true,
 		},
 	},
 	{
@@ -34,7 +54,7 @@ return {
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy",
+		event = "LspAttach",
 		priority = 1000,
 		config = function()
 			require("tiny-inline-diagnostic").setup({

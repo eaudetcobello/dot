@@ -55,6 +55,8 @@ vim.opt.smartcase = true
 vim.opt.swapfile = false
 vim.opt.timeoutlen = 400
 vim.opt.termguicolors = true
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m,%f"
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<leader>.", function()

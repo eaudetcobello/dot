@@ -9,7 +9,7 @@ return {
 				{ "fzf-native" },
 				winopts = {
 					preview = {
-						hidden = "hidden",
+						hidden = "nohidden",
 						delay = 0,
 					},
 				},
@@ -32,6 +32,11 @@ return {
 			vim.keymap.set("n", "<leader>sS", fzf.lsp_workspace_symbols, { desc = "Document symbols" })
 			vim.keymap.set("n", "<leader>sw", fzf.grep_cWORD, { desc = "Grep current word" })
 			vim.keymap.set("n", "<leader>sR", fzf.resume, { desc = "Resume" })
+
+			vim.keymap.set("n", "<leader>pp", fzf.zoxide, { desc = "Zoxide" })
+			vim.keymap.set("n", "<leader>fd", function()
+				fzf.files({ cwd = vim.fn.expand("%:p:h") })
+			end)
 
 			fzf.register_ui_select()
 		end,

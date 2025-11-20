@@ -11,7 +11,7 @@ return {
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "go", "lua", "rust", "elixir" },
+				pattern = { "go", "lua", "rust", "elixir", "zig" },
 				callback = function()
 					vim.treesitter.start()
 				end,
