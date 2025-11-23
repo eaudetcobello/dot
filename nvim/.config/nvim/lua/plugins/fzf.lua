@@ -1,44 +1,48 @@
 return {
-	{
-		"ibhagwan/fzf-lua",
-		event = "VeryLazy",
-		config = function()
-			local fzf = require("fzf-lua")
-
-			fzf.setup({
-				{ "fzf-native" },
-				winopts = {
-					preview = {
-						hidden = "nohidden",
-						delay = 0,
-					},
-				},
-				defaults = {
-					file_ignore_patterns = { "node_modules/", "vendor/", "target/" },
-					git_icons = true,
-				},
-			})
-
-			vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Find files" })
-			vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
-			vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Find git files" })
-			vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Find buffers" })
-			vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Find old files" })
-			vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Find help tags" })
-			vim.keymap.set("n", ",", fzf.buffers, { desc = "Buffers" })
-
-			vim.keymap.set("n", "<leader>sg", fzf.live_grep, { desc = "Grep" })
-			vim.keymap.set("n", "<leader>ss", fzf.lsp_document_symbols, { desc = "Document symbols" })
-			vim.keymap.set("n", "<leader>sS", fzf.lsp_workspace_symbols, { desc = "Document symbols" })
-			vim.keymap.set("n", "<leader>sw", fzf.grep_cWORD, { desc = "Grep current word" })
-			vim.keymap.set("n", "<leader>sR", fzf.resume, { desc = "Resume" })
-
-			vim.keymap.set("n", "<leader>pp", fzf.zoxide, { desc = "Zoxide" })
-			vim.keymap.set("n", "<leader>fd", function()
-				fzf.files({ cwd = vim.fn.expand("%:p:h") })
-			end)
-
-			fzf.register_ui_select()
-		end,
-	},
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local fzf = require("fzf-lua")
+	--
+	-- 		fzf.setup({
+	-- 			{ "fzf-native" },
+	-- 			grep = {
+	-- 				rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --trim -e",
+	-- 			},
+	-- 			winopts = {
+	-- 				preview = {
+	-- 					wrap = true,
+	-- 					layout = "vertical",
+	-- 				},
+	-- 			},
+	-- 			defaults = {
+	-- 				file_ignore_patterns = { "node_modules/", "vendor/", "target/" },
+	-- 				git_icons = true,
+	-- 			},
+	-- 		})
+	--
+	-- 		vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Find files" })
+	-- 		vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
+	-- 		vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Find git files" })
+	-- 		vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Find buffers" })
+	-- 		vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Find old files" })
+	-- 		vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Find help tags" })
+	-- 		vim.keymap.set("n", "<leader>fd", function()
+	-- 			fzf.files({ cwd = vim.fn.expand("%:p:h") })
+	-- 		end)
+	-- 		vim.keymap.set("n", ",", fzf.buffers, { desc = "Buffers" })
+	-- 		vim.keymap.set("n", "<leader>fz", fzf.zoxide, { desc = "Find directory (zoxide)" })
+	-- 		vim.keymap.set("n", "<leader>fs", function()
+	-- 			require("persistence").select()
+	-- 		end)
+	-- 		vim.keymap.set("n", "<leader>sg", fzf.live_grep, { desc = "Grep" })
+	-- 		vim.keymap.set("n", "<leader>ss", fzf.lsp_document_symbols, { desc = "Document symbols" })
+	-- 		vim.keymap.set("n", "<leader>sS", fzf.lsp_workspace_symbols, { desc = "Document symbols" })
+	-- 		vim.keymap.set("n", "<leader>sw", fzf.grep_cWORD, { desc = "Grep current word" })
+	-- 		vim.keymap.set("n", "<leader>sR", fzf.resume, { desc = "Resume" })
+	--
+	-- 		fzf.register_ui_select()
+	-- 	end,
+	-- },
 }

@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+
 vim.g.maplocalleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -53,10 +54,11 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.swapfile = false
-vim.opt.timeoutlen = 400
 vim.opt.termguicolors = true
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m,%f"
+vim.opt.timeoutlen = 300
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<leader>.", function()
@@ -71,10 +73,17 @@ vim.keymap.set("n", "<leader>ec", "<cmd>e $MYVIMRC<CR>", { desc = "Edit neovim c
 
 vim.keymap.set("n", "<leader>bd", "<cmd>bdel<CR>", { desc = "Delete buffer" })
 
+vim.keymap.set("n", "<c-u>", [[<c-u>zz]], { noremap = true })
+vim.keymap.set("n", "<a-d>", [[<c-d>zz]], { noremap = true })
+
 -- Normal mode: search word under cursor, then change next match
 vim.keymap.set("n", "<M-d>", [[:let @/='\<'.expand('<cword>').'\>'<CR>cgn]], { silent = true })
 -- Visual mode: search selection, then change next match
 vim.keymap.set("x", "<M-d>", [["sy:let @/=@s<CR>cgn]], { silent = true })
 
-vim.keymap.set("n", "[d", vim.diagnostic.get_next, { desc = "Previous diagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.get_prev, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Next diagnostic" })

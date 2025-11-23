@@ -3,15 +3,6 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {},
 		config = function()
-			vim.g.zig_fmt_parse_errors = 0
-			vim.lsp.enable({
-				"gopls",
-				"lua_ls",
-				"zls",
-				"rust_analyzer",
-				"copilot",
-				"terraformls",
-			})
 			vim.lsp.config["gopls"] = {
 				staticcheck = true,
 			}
@@ -25,11 +16,23 @@ return {
 				callback = function()
 					local fzf = require("fzf-lua")
 					map("n", "gd", fzf.lsp_definitions, { desc = "Goto definitions" })
-					map("n", "gr", fzf.lsp_references, { desc = "Goto references" })
+					map("n", "grr", fzf.lsp_references, { desc = "Goto references" })
 					map("n", "gt", fzf.lsp_typedefs, { desc = "Goto typedefs" })
 					map("n", "gi", fzf.lsp_implementations, { desc = "Goto implementations" })
 					map("n", "<leader>ca", fzf.lsp_code_actions, { desc = "Code actions" })
 					map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+
+					vim.diagnostic.config({
+						--severity_sort = true,
+						signs = {
+							text = {
+								[vim.diagnostic.severity.ERROR] = "󰅙",
+								[vim.diagnostic.severity.WARN] = "",
+								[vim.diagnostic.severity.INFO] = "󰋼",
+								[vim.diagnostic.severity.HINT] = "󰌵",
+							},
+						},
+					})
 				end,
 			})
 		end,
@@ -47,6 +50,20 @@ return {
 		},
 	},
 	{
-		"https://github.com/ziglang/zig.vim",
+		"mason-org/mason-lspconfig.nvim",
+		opts = {
+			automatic_enable = true,
+			ensure_installed = {
+				"ruby_lsp",
+				"gopls",
+				"lua_ls",
+				"terraformls",
+				"copilot",
+			},
+		},
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
 	},
 }

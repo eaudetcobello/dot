@@ -1,18 +1,5 @@
 return {
 	{
-		"TheNoeTrevino/no-go.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		ft = "go",
-		config = function()
-			require("no-go").setup({
-				identifiers = { "err", "error" },
-				fold_imports = true,
-			})
-			vim.highlight.priorities.semantic_tokens = 95 -- default is 125
-			vim.highlight.priorities.treesitter = 100 -- default is 100
-		end,
-	},
-	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
@@ -73,9 +60,30 @@ return {
 		end,
 	},
 	{
-		"neanias/everforest-nvim",
+		-- "neanias/everforest-nvim",
+		-- config = function()
+		-- 	vim.cmd([[colorscheme everforest]])
+		-- end,
+	},
+	{
+		"folke/tokyonight.nvim",
+		opts = {},
 		config = function()
-			vim.cmd([[colorscheme everforest]])
+			vim.cmd.colorscheme("tokyonight-storm")
+		end,
+	},
+	{
+		"Bekaboo/dropbar.nvim",
+		-- optional, but required for fuzzy finder support
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
+		config = function()
+			local dropbar_api = require("dropbar.api")
+			vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+			vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+			vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
 		end,
 	},
 }

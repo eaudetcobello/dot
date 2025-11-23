@@ -20,9 +20,9 @@ return {
 
 		require("oil").setup({
 			default_file_explorer = true,
-			win_options = {
-				winbar = "%!v:lua.get_oil_winbar()",
-			},
+			-- win_options = {
+			-- 	winbar = "%!v:lua.get_oil_winbar()",
+			-- },
 			keymaps = {
 				["<C-l>"] = false,
 				["<F5>"] = "actions.refresh",
