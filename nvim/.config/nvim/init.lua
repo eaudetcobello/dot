@@ -87,3 +87,9 @@ end, { desc = "Previous diagnostic" })
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Next diagnostic" })
+
+-- Window management
+vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "Close window" })
+
+-- Quit
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit all" })
