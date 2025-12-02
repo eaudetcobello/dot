@@ -10,8 +10,14 @@ return {
 			folds = { enable = true },
 		},
 		config = function()
+			local languages = require("config.languages")
+			local filetypes = {}
+			for _, lang in ipairs(languages) do
+				table.insert(filetypes, lang[1])
+			end
+
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "go", "lua", "rust", "elixir", "zig", "ruby" },
+				pattern = filetypes,
 				callback = function()
 					vim.treesitter.start()
 				end,
