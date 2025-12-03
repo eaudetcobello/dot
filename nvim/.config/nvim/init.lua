@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
-
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -55,10 +54,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
-vim.opt.grepprg = "rg --vimgrep"
-vim.opt.grepformat = "%f:%l:%c:%m,%f"
 vim.opt.timeoutlen = 300
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.guifont = "SauceCodePro Nerd Font:h17"
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<leader>.", function()
@@ -68,8 +66,7 @@ vim.keymap.set("n", "<leader>.", function()
 end, { desc = "Copy full file path" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Exit terminal mode" })
-vim.keymap.set("n", "<leader>ec", "<cmd>e $MYVIMRC<CR>", { desc = "Edit neovim config" })
+vim.keymap.set("t", "<C-]>", "<C-\\><C-n>", { desc = "Exit terminal" })
 
 vim.keymap.set("n", "<leader>bd", "<cmd>bdel<CR>", { desc = "Delete buffer" })
 
@@ -93,3 +90,39 @@ vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "Close window" })
 
 -- Quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit all" })
+
+require("config.globals")
+
+local termrun = require("termrun")
+termrun.setup()
+
+vim.keymap.set("n", "<F5>", function()
+	vim.cmd([[lua R("termrun").setup()]])
+end, {})
+
+vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy" })
+vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { desc = "Paste" })
+vim.keymap.set("i", "<D-v>", "<C-r>+", { desc = "Paste" })
+vim.keymap.set("c", "<D-v>", "<C-r>+", { desc = "Paste" })
+vim.keymap.set("n", "<D-t>", ":tabnew<CR>")
+vim.keymap.set("n", "<D-{>", ":tabprev<CR>")
+vim.keymap.set("n", "<D-}>", ":tabnext<CR>")
+vim.keymap.set("n", "<D-w>", ":tabclose<CR>")
+
+vim.g.neovide_input_macos_option_key_is_meta = "only_left"
+
+vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
+	pattern = "term://*",
+	callback = function()
+		vim.cmd("startinsert")
+	end,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		vim.opt_local.signcolumn = "no"
+		vim.opt_local.scrolloff = 0
+	end,
+})

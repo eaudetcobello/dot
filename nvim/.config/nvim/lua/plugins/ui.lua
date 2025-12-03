@@ -60,21 +60,20 @@ return {
 		end,
 	},
 	{
-		-- "neanias/everforest-nvim",
-		-- config = function()
-		-- 	vim.cmd([[colorscheme everforest]])
-		-- end,
-	},
-	{
-		"folke/tokyonight.nvim",
-		opts = {},
+		"neanias/everforest-nvim",
 		config = function()
-			vim.cmd.colorscheme("tokyonight-storm")
+			vim.cmd([[colorscheme everforest]])
 		end,
 	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("tokyonight-storm")
+	-- 	end,
+	-- },
 	{
 		"Bekaboo/dropbar.nvim",
-		-- optional, but required for fuzzy finder support
 		dependencies = {
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
