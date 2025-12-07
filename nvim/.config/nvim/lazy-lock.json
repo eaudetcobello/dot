@@ -1,5 +1,7 @@
 {
+  "baleia.nvim": { "branch": "main", "commit": "fb3aff021b2b64ef820d0230d2c22ebfaf71bb6a" },
   "blink.cmp": { "branch": "main", "commit": "327fff91fe6af358e990be7be1ec8b78037d2138" },
+  "compile-mode.nvim": { "branch": "nightly", "commit": "e94543312729df6cc6efc8a136e9a58d52099df2" },
   "conform.nvim": { "branch": "master", "commit": "ffe26e8df8115c9665d24231f8a49fadb2d611ce" },
   "copilot.vim": { "branch": "release", "commit": "f89e977c87180519ba3b942200e3d05b17b1e2fc" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },

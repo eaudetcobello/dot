@@ -57,6 +57,7 @@ vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.o.guifont = "SauceCodePro Nerd Font:h17"
+vim.o.exrc = true
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 vim.keymap.set("n", "<leader>.", function()
