@@ -10,8 +10,6 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-live-grep-args.nvim",
-		-- This will not install any breaking changes.
-		-- For major updates, this must be adjusted manually.
 		version = "1.1.0",
 	},
 	{
@@ -38,7 +36,7 @@ return {
 			vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Switch buffer" })
 
 			-- Search (s prefix)
-			vim.keymap.set("n", "<leader>sg", telescope.extensions.live_grep_args.live_grep_args, { desc = "Grep" })
+			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Grep" })
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Search word" })
 			vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "Document symbols" })
 			vim.keymap.set("n", "<leader>sS", builtin.lsp_workspace_symbols, { desc = "Workspace symbols" })

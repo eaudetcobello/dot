@@ -94,13 +94,6 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit all" })
 
 require("config.globals")
 
-local termrun = require("termrun")
-termrun.setup()
-
-vim.keymap.set("n", "<F5>", function()
-	vim.cmd([[lua R("termrun").setup()]])
-end, {})
-
 vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy" })
 vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { desc = "Paste" })
 vim.keymap.set("i", "<D-v>", "<C-r>+", { desc = "Paste" })
@@ -116,11 +109,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
 	pattern = "term://*",
 	callback = function()
 		vim.cmd("startinsert")
-	end,
-})
-
-vim.api.nvim_create_autocmd("TermOpen", {
-	callback = function()
 		vim.opt_local.number = false
 		vim.opt_local.relativenumber = false
 		vim.opt_local.signcolumn = "no"

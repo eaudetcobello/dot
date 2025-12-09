@@ -54,8 +54,11 @@ return {
 			for _, lang in ipairs(languages) do
 				table.insert(lsp_servers, lang[2])
 			end
-			-- Add additional LSP servers not tied to a specific language
-			table.insert(lsp_servers, "copilot")
+
+            -- Remove Lua for now as the version provided by Mason has a bug.
+            -- Use the system lua-language-server installed with brew instead.
+            -- github.com/LuaLS/lua-language-server/issues/3301
+            -- lsp_servers["lua_ls"] = nil
 
 			return {
 				automatic_enable = true,

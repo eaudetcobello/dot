@@ -1,4 +1,5 @@
 return {
+    {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
 	dependencies = {
@@ -12,5 +13,6 @@ return {
 		require("nvim-tree").setup({
 			sync_root_with_cwd = true,
 		})
-	end,
+	end
+    },
 }

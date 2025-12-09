@@ -11,18 +11,4 @@ return {
 			{ "<leader>gg", "<cmd>Neogit kind=split<cr>", desc = "Show Neogit UI" },
 		},
 	},
-	{
-		"linrongbin16/gitlinker.nvim",
-		event = "VeryLazy",
-		opts = {},
-		keys = {
-			{
-				"<leader>go",
-				function()
-					vim.cmd("silent! GitLink! default_branch")
-				end,
-				desc = "Open repository in browser",
-			},
-		},
-	},
 }

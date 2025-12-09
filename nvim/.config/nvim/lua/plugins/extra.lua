@@ -1,5 +1,4 @@
 return {
-	{ "wellle/targets.vim", event = "VeryLazy" },
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",

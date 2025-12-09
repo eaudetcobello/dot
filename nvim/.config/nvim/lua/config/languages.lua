@@ -1,7 +1,7 @@
 -- Centralized language configuration
 return {
 	-- List of languages to enable for LSP, treesitter, and formatters
-	-- Format: { filetype, lsp_server, formatters (optional) }
+	-- Format: { filetype, lspconfig_name, formatters (optional) }
 	{ "go", "gopls", { "goimports" } },
 	{ "lua", "lua_ls", { "stylua" } },
 	{ "terraform", "terraformls" },
