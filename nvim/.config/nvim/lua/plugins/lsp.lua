@@ -4,18 +4,22 @@ return {
 		opts = {},
 		config = function()
 			vim.lsp.config["gopls"] = {
-				staticcheck = true,
+				settings = {
+					gopls = {
+						staticcheck = true,
+					},
+				},
 			}
 			local lspgroup = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
 			local map = vim.keymap.set
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = lspgroup,
 				callback = function()
-					local builtin = require("telescope.builtin")
-					map("n", "gd", builtin.lsp_definitions, { desc = "Goto definitions" })
-					map("n", "grr", builtin.lsp_references, { desc = "Goto references" })
-					map("n", "gt", builtin.lsp_type_definitions, { desc = "Goto typedefs" })
-					map("n", "gi", builtin.lsp_implementations, { desc = "Goto implementations" })
+					local fzf = require("fzf-lua")
+					map("n", "gd", fzf.lsp_definitions, { desc = "Goto definitions" })
+					map("n", "grr", fzf.lsp_references, { desc = "Goto references" })
+					map("n", "gt", fzf.lsp_typedefs, { desc = "Goto typedefs" })
+					map("n", "gi", fzf.lsp_implementations, { desc = "Goto implementations" })
 					map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 					map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 
